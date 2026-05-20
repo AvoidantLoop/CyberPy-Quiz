@@ -10,13 +10,13 @@ pipeline {
         }
 stage('Install Dependencies') {
     steps {
-        bat '"C:\\Users\\jaisw\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe" -m pip install -r requirements.txt'
+        bat '"C:\\Users\\jaisw\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pip install -r requirements.txt'
     }
 }
 
 stage('Run Tests') {
     steps {
-        bat '"C:\\Users\\jaisw\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe" -m pytest tests/ -v'
+        bat '"C:\\Users\\jaisw\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" -m pytest tests/ -v'
     }
 }
 
