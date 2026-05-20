@@ -29,14 +29,18 @@ pipeline {
 
         stage('Deploy Container') {
             steps {
-                bat 'docker-compose down'
+                bat 'docker-compose down || exit 0'
                 bat 'docker-compose up -d'
             }
         }
     }
 
     post {
-        success { echo 'Deployment successful!' }
-        failure { echo 'Pipeline failed. Check logs.' }
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Pipeline failed. Check logs.'
+        }
     }
 }
