@@ -8,18 +8,17 @@ pipeline {
                     url: 'https://github.com/AvoidantLoop/CyberPy-Quiz.git'
             }
         }
+stage('Install Dependencies') {
+    steps {
+        bat 'python -m pip install -r requirements.txt'
+    }
+}
 
-        stage('Install Dependencies') {
-            steps {
-                bat 'pip install -r requirements.txt'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                bat 'pytest tests/ -v'
-            }
-        }
+stage('Run Tests') {
+    steps {
+        bat 'python -m pytest tests/ -v'
+    }
+}
 
         stage('Build Docker Image') {
             steps {
