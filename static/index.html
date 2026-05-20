@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberPy Quiz - Master Python Basics</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Local Stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Subtle Background Glow Elements -->
+    <div class="glow-orb glow-1"></div>
+    <div class="glow-orb glow-2"></div>
+    <div class="glow-orb glow-3"></div>
+
+    <div class="app-container">
+        <!-- LANDING PAGE VIEW -->
+        <section id="landing-view" class="view active">
+            <div class="brand-header">
+                <div class="logo-wrapper">
+                    <i class="fa-brands fa-python python-logo"></i>
+                </div>
+                <h1 class="gradient-text">CyberPy Quiz</h1>
+                <p class="tagline">Challenge your Python basics in a high-fidelity environment.</p>
+            </div>
+
+            <div class="card glass-card fade-in">
+                <div class="form-group">
+                    <label for="username" class="input-label">Enter Your Name</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-user input-icon"></i>
+                        <input type="text" id="username" placeholder="e.g., Ada Lovelace" autocomplete="off" maxlength="25">
+                    </div>
+                    <span id="name-error" class="error-text"><i class="fa-solid fa-triangle-exclamation"></i> Please enter a valid name.</span>
+                </div>
+
+                <button id="start-btn" class="btn primary-btn pulse-glow">
+                    <span>Begin Challenge</span>
+                    <i class="fa-solid fa-arrow-right-long btn-icon"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- QUIZ PAGE VIEW -->
+        <section id="quiz-view" class="view">
+            <div class="quiz-header">
+                <div class="candidate-badge">
+                    <i class="fa-regular fa-user-circle"></i>
+                    <span id="display-name">Candidate</span>
+                </div>
+                <div class="progress-badge">
+                    Question <span id="current-q-index">1</span> of <span id="total-questions">10</span>
+                </div>
+            </div>
+
+            <!-- Animated Progress Bar -->
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar-fill"></div>
+            </div>
+
+            <div class="card glass-card main-quiz-card">
+                <!-- Question text -->
+                <h2 id="question-text" class="question-title">What is the output of print(2 ** 3) in Python?</h2>
+
+                <!-- Choice cards -->
+                <div id="options-container" class="options-grid">
+                    <!-- Javascript will populate these buttons -->
+                </div>
+            </div>
+
+            <div class="quiz-footer">
+                <button id="next-btn" class="btn primary-btn disabled-btn" disabled>
+                    <span id="next-btn-text">Next Question</span>
+                    <i class="fa-solid fa-chevron-right btn-icon" id="next-btn-icon"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- RESULTS PAGE VIEW -->
+        <section id="results-view" class="view">
+            <div class="brand-header mini">
+                <h1 class="gradient-text">Quiz Results</h1>
+            </div>
+
+            <div class="card glass-card results-overview-card fade-in">
+                <div class="circular-progress-wrapper">
+                    <svg class="radial-gauge" viewBox="0 0 120 120">
+                        <circle class="gauge-bg" cx="60" cy="60" r="54" />
+                        <circle id="gauge-progress" class="gauge-fill" cx="60" cy="60" r="54" style="stroke-dasharray: 339.292; stroke-dashoffset: 339.292;" />
+                    </svg>
+                    <div class="gauge-content">
+                        <span id="result-score-percent" class="gauge-score">80%</span>
+                        <span id="result-score-raw" class="gauge-subtitle">8 / 10 Correct</span>
+                    </div>
+                </div>
+
+                <h2 id="feedback-headline" class="feedback-title">Superb Python Developer!</h2>
+                <p id="feedback-message" class="feedback-desc">Outstanding! You have solid foundational knowledge of Python variables, data types, and syntax rules.</p>
+                
+                <div class="candidate-card-summary">
+                    <div class="summary-item">
+                        <span class="label">Candidate</span>
+                        <span id="summary-candidate" class="val">Ada Lovelace</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Accuracy</span>
+                        <span id="summary-accuracy" class="val">80%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Question Review Section -->
+            <div class="review-section">
+                <h3 class="section-title"><i class="fa-solid fa-list-check"></i> Detailed Performance Breakdown</h3>
+                <div id="review-list" class="review-container">
+                    <!-- JavaScript will generate review items here -->
+                </div>
+            </div>
+
+            <div class="results-footer">
+                <button id="restart-btn" class="btn secondary-btn">
+                    <i class="fa-solid fa-rotate-left btn-icon-left"></i>
+                    <span>Retake Challenge</span>
+                </button>
+            </div>
+        </section>
+    </div>
+    <!-- Interactive Script -->
+    <script src="/static/script.js"></script>
+</body>
+</html>

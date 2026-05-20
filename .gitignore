@@ -1,0 +1,19 @@
+# Python compiled files and bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Environments and dependencies
+.venv/
+venv/
+ENV/
+env/
+requirements-dev.txt
+
+# Editor / System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

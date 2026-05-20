@@ -1,0 +1,804 @@
+/* CSS RESET & VARIABLES */
+:root {
+    --bg-dark: #080b11;
+    --card-bg: rgba(17, 24, 39, 0.7);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-border-hover: rgba(0, 242, 254, 0.4);
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --primary-grad: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    --primary-glow: rgba(0, 242, 254, 0.3);
+    
+    --success: #10b981;
+    --success-bg: rgba(16, 185, 129, 0.1);
+    --success-border: rgba(16, 185, 129, 0.3);
+    
+    --error: #f43f5e;
+    --error-bg: rgba(244, 63, 94, 0.1);
+    --error-border: rgba(244, 63, 94, 0.3);
+
+    --selected-border: #4facfe;
+    --selected-bg: rgba(79, 172, 254, 0.08);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+/* DECORATIVE AMBIENT ORBS */
+.glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: -1;
+    opacity: 0.45;
+    pointer-events: none;
+    animation: float 25s infinite alternate ease-in-out;
+}
+
+.glow-1 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.5) 0%, rgba(79, 172, 254, 0) 70%);
+    top: -150px;
+    left: -150px;
+}
+
+.glow-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(147, 51, 234, 0.4) 0%, rgba(147, 51, 234, 0) 70%);
+    bottom: -200px;
+    right: -150px;
+    animation-delay: -5s;
+}
+
+.glow-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0) 70%);
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(40px) scale(1.1); }
+}
+
+/* APP CONTAINER */
+.app-container {
+    width: 100%;
+    max-width: 680px;
+    z-index: 10;
+    position: relative;
+}
+
+/* CARD SYSTEM */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 24px;
+    padding: 36px;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* TYPOGRAPHY UTILITIES */
+.gradient-text {
+    background: var(--primary-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+}
+
+/* VIEWS CONTROLLER */
+.view {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+}
+
+.view.active {
+    display: flex;
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+/* 1. LANDING PAGE VIEW */
+#landing-view {
+    align-items: center;
+    text-align: center;
+}
+
+.brand-header {
+    margin-bottom: 40px;
+}
+
+.brand-header.mini {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.logo-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 24px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 10px 25px rgba(0, 242, 254, 0.15);
+    position: relative;
+}
+
+.logo-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 24px;
+    background: var(--primary-grad);
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.python-logo {
+    font-size: 48px;
+    background: var(--primary-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-header h1 {
+    font-size: 42px;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+.tagline {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+/* INPUT FORM */
+.form-group {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 5;
+}
+
+.input-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 20px;
+    color: var(--text-muted);
+    font-size: 18px;
+    transition: var(--transition-smooth);
+}
+
+#username {
+    width: 100%;
+    padding: 16px 20px 16px 52px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+#username:focus {
+    border-color: var(--selected-border);
+    box-shadow: 0 0 20px var(--primary-glow), inset 0 0 10px rgba(0, 242, 254, 0.05);
+}
+
+#username:focus + .input-icon {
+    color: var(--selected-border);
+}
+
+.error-text {
+    color: var(--error);
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 8px;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    animation: fadeIn 0.3s ease;
+}
+
+/* BUTTONS */
+.btn {
+    width: 100%;
+    padding: 18px 28px;
+    border-radius: 16px;
+    border: none;
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.primary-btn {
+    background: var(--primary-grad);
+    color: #04080f;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px var(--primary-glow);
+}
+
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+.pulse-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    box-shadow: 0 0 25px var(--primary-glow);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.pulse-glow:hover::after {
+    opacity: 1;
+}
+
+.btn-icon {
+    font-size: 18px;
+    transition: var(--transition-smooth);
+}
+
+.primary-btn:hover .btn-icon {
+    transform: translateX(4px);
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-icon-left {
+    font-size: 16px;
+    transition: var(--transition-smooth);
+}
+
+.secondary-btn:hover .btn-icon-left {
+    transform: rotate(-45deg);
+}
+
+/* 2. QUIZ PAGE VIEW */
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.candidate-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.candidate-badge i {
+    color: #4facfe;
+    font-size: 16px;
+}
+
+.progress-badge {
+    font-size: 14px;
+    font-weight: 700;
+    color: #00f2fe;
+    background: rgba(0, 242, 254, 0.08);
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(0, 242, 254, 0.15);
+}
+
+/* PROGRESS BAR */
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin-bottom: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 10%; /* Initial dynamic state */
+    background: var(--primary-grad);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--primary-glow);
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* MAIN QUIZ CARD */
+.main-quiz-card {
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.question-title {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 32px;
+    color: var(--text-primary);
+}
+
+/* OPTIONS GRID & CARDS */
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.option-card {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-align: left;
+    position: relative;
+    user-select: none;
+}
+
+.option-card:hover {
+    border-color: var(--card-border-hover);
+    background: rgba(15, 23, 42, 0.7);
+    transform: translateX(4px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.option-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-right: 18px;
+    transition: var(--transition-smooth);
+    flex-shrink: 0;
+}
+
+.option-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+/* SELECTED OPTION CARD */
+.option-card.selected {
+    border-color: var(--selected-border);
+    background: var(--selected-bg);
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.15);
+}
+
+.option-card.selected .option-badge {
+    background: var(--selected-border);
+    border-color: var(--selected-border);
+    color: #04080f;
+    box-shadow: 0 0 10px rgba(79, 172, 254, 0.4);
+}
+
+/* NEXT/SUBMIT FOOTER */
+.quiz-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.disabled-btn {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* 3. RESULTS PAGE VIEW */
+.results-overview-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+}
+
+/* RADIAL SCORE GAUGE */
+.circular-progress-wrapper {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    margin-bottom: 24px;
+}
+
+.radial-gauge {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.04);
+    stroke-width: 8;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke: url(#gauge-gradient); /* Defined in dynamic injection or color variables */
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom radial stroke styling using modern gradients */
+.gauge-fill {
+    stroke: #00f2fe; /* fallback */
+    stroke: -webkit-linear-gradient(top, #00f2fe, #4facfe);
+}
+
+.gauge-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gauge-score {
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.gauge-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.feedback-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.feedback-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-width: 440px;
+    margin-bottom: 28px;
+}
+
+.candidate-card-summary {
+    display: flex;
+    gap: 30px;
+    padding: 16px 32px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.summary-item .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.summary-item .val {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* PERFORMANCE BREAKDOWN REVIEW */
+.review-section {
+    margin-bottom: 32px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+}
+
+.section-title i {
+    color: #4facfe;
+}
+
+.review-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* REVIEW CARD STATES */
+.review-card {
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: var(--transition-smooth);
+}
+
+.review-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.review-q-text {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--text-primary);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.review-card.correct-answer {
+    border-color: var(--success-border);
+    background: var(--success-bg);
+}
+
+.review-card.correct-answer .status-badge {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--success);
+    border: 1px solid var(--success-border);
+}
+
+.review-card.incorrect-answer {
+    border-color: var(--error-border);
+    background: var(--error-bg);
+}
+
+.review-card.incorrect-answer .status-badge {
+    background: rgba(244, 63, 94, 0.15);
+    color: var(--error);
+    border: 1px solid var(--error-border);
+}
+
+.answers-comparison {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ans-row {
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+    gap: 10px;
+}
+
+.ans-row .label-tag {
+    font-weight: 600;
+    color: var(--text-muted);
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.ans-row .answer-val {
+    font-weight: 500;
+}
+
+.review-card.correct-answer .ans-row.user-ans .answer-val {
+    color: var(--success);
+}
+
+.review-card.incorrect-answer .ans-row.user-ans .answer-val {
+    color: var(--error);
+}
+
+.ans-row.correct-ans .answer-val {
+    color: var(--success);
+}
+
+.results-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+/* RESPONSIVE SCALING */
+@media (max-width: 640px) {
+    body {
+        padding: 12px;
+    }
+    
+    .card {
+        padding: 24px;
+        border-radius: 20px;
+    }
+    
+    .brand-header h1 {
+        font-size: 32px;
+    }
+    
+    .question-title {
+        font-size: 18px;
+        margin-bottom: 24px;
+    }
+    
+    .option-card {
+        padding: 14px 18px;
+    }
+    
+    .option-text {
+        font-size: 14px;
+    }
+    
+    .circular-progress-wrapper {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .gauge-score {
+        font-size: 30px;
+    }
+    
+    .candidate-card-summary {
+        flex-direction: column;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 16px 24px;
+    }
+    
+    .summary-item {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
